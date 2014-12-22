@@ -80,22 +80,51 @@ end
 
 
 require 'ppc'
+
+baidu_username = ''
+baidu_password = ''
+baidu_token = ''
+
+qihu_username = ''
+qihu_password = ''
+qihu_token =  ''
+qihu_cipherkey = ''
+qihu_cipheriv = ''
+qihu_accessToken = ''
+
+sogou_username = ''
+sogou_password = ''
+sogou_token = ''
+
+
 $domain = ''
+$baidu_auth =  {
+                username: baidu_username,
+                password: baidu_password,
+                token: baidu_token,
+                se: 'baidu'
+               }
 
-$baidu_username = ''
-$baidu_password = ''
-$baidu_token = ''
+$qihu_auth = {
+              username: qihu_username,
+              password: qihu_password,
+              cipherkey: qihu_cipherkey,
+              cipheriv: qihu_cipheriv,
+              token: qihu_token,
+              se: 'qihu'
+             }
 
-$qihu_username = ''
-$qihu_password = ''
-$qihu_token =  ''
-$qihu_cipherkey = ''
-$qihu_cipheriv = ''
-$qihu_accessToken = ''
+$sogou_auth = {
+                username: sogou_username,
+                password: sogou_password,
+                token: sogou_token,
+                se: 'sogou'
+              }
 
-$sogou_username = ''
-$sogou_password = ''
-$sogou_token = ''
+
+
+
+
 
 def is_success( result )
   expect( result[:succ] ).to eq true

@@ -21,7 +21,6 @@ module PPC
                                 'accessToken' => auth[:accessToken], 
                                 'serveToken' => Time.now.to_i.to_s  }
               )
-        p params
         response.parsed_response
       end
 
@@ -37,7 +36,7 @@ module PPC
         if content['failures'] != nil
           result[:succ] = false
           result[:failure] = content['failures']['item']
-          result[:result] = content[ key ]
+          result[:result] = nil
         else
           result[:succ] = true
           result[:result] = func[ key==''? content : content[ key ] ]

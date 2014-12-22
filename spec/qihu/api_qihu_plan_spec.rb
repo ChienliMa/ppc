@@ -1,7 +1,5 @@
 describe ::PPC::API::Qihu::Plan do
-  auth = {}
-  auth[:token] = $qihu_token
-  auth[:accessToken] = $qihu_accessToken
+  auth = $baidu_auth
 
   test_plan_id = 0
 

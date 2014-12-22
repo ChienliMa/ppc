@@ -1,7 +1,5 @@
 describe ::PPC::API::Qihu::Group do
-  auth = {}
-  auth[:token] = $qihu_token
-  auth[:accessToken] =  $qihu_accessToken
+  auth = $baidu_auth
 
   test_plan_id = ::PPC::API::Qihu::Plan::ids( auth )[:result][0].to_i
   test_group_id = 0 

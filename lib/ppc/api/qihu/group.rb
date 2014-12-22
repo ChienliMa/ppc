@@ -6,16 +6,16 @@ module PPC
         Service = 'group'
 
         @map = [
-                        [:id, :id ],
-                        [:plan_id, :campaignId],
-                        [:status, :status ],
-                        [:name, :name ],
-                        [:price, :price ],
-                        # negateive为json格式，make_type要定制
-                        [:negative, :negativeWords ],
-                        [:add_time, :addTime],
-                        [:update_time, :updateTime]
-                      ]
+                [:id, :id ],
+                [:plan_id, :campaignId],
+                [:status, :status ],
+                [:name, :name ],
+                [:price, :price ],
+                # negateive为json格式，make_type要定制
+                [:negative, :negativeWords ],
+                [:add_time, :addTime],
+                [:update_time, :updateTime]
+               ]
 
         # 再次封装提供all和ids
         def self.ids( auth )
@@ -37,7 +37,7 @@ module PPC
 
         def self.all( auth )
           '''
-          思考了一下， 如果要实现这个方法要套三重循环，效率机器地下，qihu不提供all方法
+          unimplemented due to ineffciency
           '''
           # unimplement
         end
@@ -97,11 +97,8 @@ module PPC
           type = {}
 
             map.each do |key|
-              if key[0] == :negative
-                value = param[ :negative ].to_json
-              else
-                value = param[ key[0] ]
-              end
+              # next line transfer negative param to json
+              key[0]==:negative&&param[:negative] ? value=param[:negative].to_json : value=param[key[0]]
               type[ key[1] ] = value if value != nil
             end
 

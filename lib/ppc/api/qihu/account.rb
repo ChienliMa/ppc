@@ -7,17 +7,17 @@ module PPC
         Service = 'account'
 
         @map = [
-                        [ :id, :uid ],
-                        [ :name, :userName ],
-                        [ :email, :email],
-                        [ :company, :companyName],
-                        [ :industry1, :industry1],
-                        [ :industry2, :industry2],
-                        [ :balance, :balance],
-                        [ :budget, :budget],
-                        [ :resources, :resources],
-                        [ :open_domains, :allowDomain]
-                      ]
+                [ :id, :uid ],
+                [ :name, :userName ],
+                [ :email, :email],
+                [ :company, :companyName],
+                [ :industry1, :industry1],
+                [ :industry2, :industry2],
+                [ :balance, :balance],
+                [ :budget, :budget],
+                [ :resources, :resources],
+                [ :open_domains, :allowDomain]
+              ]
         
         def self.info( auth )
           response = request( auth, Service, 'getInfo' )

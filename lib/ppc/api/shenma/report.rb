@@ -1,26 +1,25 @@
 # -*- coding:utf-8 -*-
 module PPC
   module API
-    class Sogou
-      class Report< Sogou
+    class Shenma
+      class Report< Shenma
         Service = 'Report'
       
         # 需要用到的映射集合
-        Type_map = { 'account' => 1, 'plan'=> 2, 'group'=> 3, 
-                      'keyword'=> 5, 'creative'=> 4, 'pair'=> 15, 
-                       'region'=> 3, 'wordid'=> 9 }
+        Type_map = { 'account' =>2, 'plan'=> 10, 'group'=> 11, 
+                      'keyword'=> 14, 'creative'=> 12, 'region'=> 3, 
+                       'query'=> 6, 'phone' => 22, 'app' => 23 }
 
-        Level_map = {  'account' => 1, 'plan' => 2, 'group' => 3, 
-                        'creative' => 4, 'keywordid' => 5, 'pair' => 12, 
-                          'wordid' => 6 }
-        Device_map = { 'all' => 0, 'pc' => 1, 'mobile' => 2 }
+        Level_map = {  'account' => 2, 'plan' => 3, 'group' => 5, 
+                        'creative' => 7, 'keyword' => 11, 'phone' => 22,
+                         'app' => 23, 'pair' => 12 }
 
-        Unit_map = { 'day' => 1, 'week' => 2, 'month' => 3 }
+        Unit_map = { 'day' => 5, 'month' => 3, 'default' => 8 }
 
         def self.get_id( auth, params, debug = false )
           request = make_reportrequest( params )
           body =  { ReportRequestType: request }
-          response = request( auth, Service, ' getReportId' ,body) 
+          response = request( auth, '/report/getReport' ,body) 
           process( response, 'reportId', debug ){ |x| x }
         end
 
@@ -29,14 +28,15 @@ module PPC
           input id should be string
           '''
           status = {1=>'Waiting' ,2=>'Opearting' ,3=>'Finished'}
-          body = { reportId:  id }
-          response = request( auth, Service, ' getReportState' ,body)
+          body = { taskId:  id }
+          response = request( auth, '/task/getTaskState' ,body)
           process( response, 'isGenerated', debug ){ |x| status[x] }
         end
 
-        def self.get_url( auth, id, debug = false )
-          body = { reportId:  id }
-          response = request( auth, Service, ' getReportPath' ,body)
+        # todo : rewrite method
+        def self.download( auth, id, debug = false )
+          body = { fileId:  id }
+          response = request( auth, '/file/download' ,body)
           process( response, 'reportPath', debug ){ |x| x }       
         end
 
@@ -49,13 +49,13 @@ module PPC
           ::PPC::API::Baidu::Report:make_reportrequest()
           '''
           requesttype = {}
-          requesttype[:performanceData]    =     param[:fields]  && %w(cost cpc click impression ctr) || %w(click)
+          requesttype[:performanceData]    =     param[:fields] 
           requesttype[:reportType]         =     Type_map[ param[:type] ]        if  param[:type] 
           requesttype[:levelOfDetails]     =     Level_map[  param[:level] ]     if param[:level]
           requesttype[:statRange]          =     Level_map[ param[:range] ]      if param[:range]
-          requesttype[:unitOfTime]         =     Unit_map[ param[:unit] ]        if param[:unit] 
-          requesttype[:platform]           =     Device_map[ param[:device] ]    if param[:device]
-          requesttype[:idOnly]             =     param[:id_only]                 if param[:id_only]!=nil
+          requesttype[:unitOfTime]         =     Unit_map[ param[:unit] ]        if param[:unit]
+          requesttype[:idOnly]             =     param[:id_only]   || false
+          requesttype[:statIds]            =     param[:ids] if param[:ids] != nil
           requesttype[:startDate] = parse_date( param[:startDate] )
           requesttype[:endDate]   = parse_date( param[:endDate] )
           return requesttype
@@ -75,7 +75,7 @@ module PPC
           else
             date = (Time.now - 24*3600)
           end
-          date
+          date.to_s[0,10]
         end
 
         def download_report( auth, param, debug = false )
@@ -88,7 +88,7 @@ module PPC
               break if call('report').get_state( auth, id )[:result] == 'Finished'
               p "Report is not generated, waiting..." if debug 
             end
-
+            # need to rewrite the download method here.
             url = call('report').get_url( auth, id )[:result]
             return open(url).read.force_encoding('gb18030').encode('utf-8')
           else

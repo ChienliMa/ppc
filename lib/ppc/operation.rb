@@ -4,22 +4,22 @@ module PPC
     attr_accessor :id
     
     def initialize( params )
-      @id   = param[:id]
-      @se   = param[:se]
+      @id   = params[:id]
+      @se   = params[:se]
       @auth = {
-        username: param[:username],
-        password: param[:password],
+        username: params[:username],
+        password: params[:password],
         # 在qihu360的api中，apikey就是auth[:token]
-        token:    param[:token]
+        token:    params[:token]
       }
       # add support for qihu360
-      if  @se == 'qihu' && param[:accessToken] == nil 
-        raise "you are using qihu service, please enter cipherkey" if param[:cipherkey] == nil
-        raise "you are using qihu service, please enter cipheriv" if param[:cipheriv] == nil
-        cipher = { key: param[:cipherkey], iv: param[:cipheriv] } 
+      if  @se == 'qihu' && params[:accessToken] == nil 
+        raise "you are using qihu service, please enter cipherkey" if params[:cipherkey] == nil
+        raise "you are using qihu service, please enter cipheriv" if params[:cipheriv] == nil
+        cipher = { key: params[:cipherkey], iv: params[:cipheriv] } 
         @auth[:accessToken] = qihu_refresh_token( @auth, cipher )
       else
-        @auth[:accessToken] = param[:accessToken]
+        @auth[:accessToken] = params[:accessToken]
       end
     end
 
@@ -182,8 +182,10 @@ end # PPC
 # because if we load files before defining the 
 # module ::PPC::Operation. Errors of 'uninitialized constance'
 # will occur
+require 'ppc/operation/report'
 require 'ppc/operation/account'
 require 'ppc/operation/group'
 require 'ppc/operation/plan'
 require 'ppc/operation/keyword'
 require 'ppc/operation/creative'
+

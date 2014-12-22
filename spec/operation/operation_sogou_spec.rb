@@ -1,14 +1,11 @@
-require 'operation/operation_spec_helper'
+require './operation_spec_helper'
 
-  auth =  {}
-  auth[:username] = $sogou_username
-  auth[:password] = $sogou_password
-  auth[:token] = $sogou_token
-  auth[:se] = 'sogou'
+  auth = $sogou_auth
   preparation = ::PPC::API::Sogou::Group::ids( auth )
   test_plan_id = preparation[:result][0][:plan_id]
   test_group_id = preparation[:result][0][:group_ids][0]
-   ::PPC::API::Sogou.debug_on
+ 
+  ::PPC::API::Sogou.debug_on
 
 describe ::PPC::Operation::Account do
   subject{

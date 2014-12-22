@@ -1,8 +1,5 @@
 describe ::PPC::API::Sogou::Group do
-  auth =  {}
-  auth[:username] = $sogou_username
-  auth[:password] = $sogou_password 
-  auth[:token] = $sogou_token
+  auth = $sogou_auth
 
   test_plan_id = ::PPC::API::Sogou::Plan.ids(auth)[:result][0]
   test_group_id = []

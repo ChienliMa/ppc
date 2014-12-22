@@ -1,13 +1,7 @@
-require 'operation/operation_spec_helper'
+require './operation_spec_helper'
 
-  auth =  {}
-  auth[:username] = $qihu_username
-  auth[:password] = $qihu_password
-  auth[:cipherkey] = $qihu_cipherkey
-  auth[:cipheriv] = $qihu_cipheriv
-  auth[:token] = $qihu_token
-
-  auth[:se] = 'qihu'
+  auth =  $qihu_auth
+  
   test_plan_id = 717479502
   test_group_id = 1203987666
 
@@ -32,10 +26,10 @@ describe ::PPC::Operation::Plan do
     ::PPC::Operation::Plan.new( auth.merge({id:test_plan_id}) )
   }
 
-  # it_should_behave_like( "object", {budget:2000})
-  # it_should_behave_like( "object operator", 'group', 
-  #                                     {name:'test_operation_group', price:500},
-  #                                     {name:'updated_operation_test_group'} )  
+  it_should_behave_like( "object", {budget:2000})
+  it_should_behave_like( "object operator", 'group', 
+                                      {name:'test_operation_group', price:500},
+                                      {name:'updated_operation_test_group'} )  
   it_should_behave_like( "object parent", 'group')
 end
 

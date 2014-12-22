@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{ppc api for  baidu qihu sogou}
   spec.description   = %q{ppc api for  baidu qihu sogou}
   spec.homepage      = "http://github.com/elong/ppc"
-  spec.license       = "MIT"
+  spec.license       = "GNU"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }

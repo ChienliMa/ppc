@@ -6,20 +6,20 @@ module PPC
         Service = 'keyword'
 
         @map = [
-                        [:id, :id],
-                        [:group_id, :groupId],
-                        [:keyword, :word],
-                        [:price, :price],
-                        [:match_type, :matchType],
-                        [:pc_destination, :destinationUrl],
-                        [:status, :status]
-                      ]
+                  [:id, :id],
+                  [:group_id, :groupId],
+                  [:keyword, :word],
+                  [:price, :price],
+                  [:match_type, :matchType],
+                  [:pc_destination, :destinationUrl],
+                  [:status, :status]
+                ]
 
         @status_map = [ 
-                                    [:id,:id], 
-                                    [:quality,:qualityScore],
-                                    [:status,:status]
-                                  ]
+                        [:id,:id], 
+                        [:quality,:qualityScore],
+                        [:status,:status]
+                      ]
 
         def self.get( auth, ids )
           ids = to_json_string( ids )

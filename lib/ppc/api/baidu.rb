@@ -88,7 +88,7 @@ module PPC
                                                           ...                 ]
         ===================
         @ output:
-        : types : list of hash that complying with search engine api
+          types : list of hash that complying with search engine api
         '''
         params = [ params ] unless params.is_a? Array
 
@@ -96,10 +96,10 @@ module PPC
         params.each do |param|
           type = {}
 
-            map.each do |key|
-              value = param[ key[0] ]
-              type[ key[1] ] = value if value != nil
-            end
+          map.each do |key|
+            value = param[ key[0] ]
+            type[ key[1] ] = value if value != nil
+          end
 
           types << type
         end
@@ -123,10 +123,10 @@ module PPC
         types.each do |type|
           param = {}
           
-            map.each do |key|
-                value = type[ key[1].to_s ]
-                param[ key[0] ] = value if value != nil
-            end
+          map.each do |key|
+              value = type[ key[1].to_s ]
+              param[ key[0] ] = value if value != nil
+          end
 
           params << param
         end
