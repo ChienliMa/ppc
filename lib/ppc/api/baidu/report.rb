@@ -69,29 +69,6 @@ module PPC
         end
 
         private 
-<<<<<<< HEAD
-        def self.make_realtimerequest( params )
-          '''
-          make RealTimeRequestType
-          没有封装关键字：attribute，order,statIds
-          '''
-          params = [ params ] unless params.is_a? Array
-          requesttypes = []
-          params.each do  |param|
-            requesttype = {}
-            startDate, endDate = get_date( param )
-
-            requesttype[:performanceData]   =     param[:fields]   ||   %w(click impression)
-            requesttype[:reportType]        =     Type_map[ param[:type] ]      if  param[:type] 
-            requesttype[:levelOfDetails]    =     Level_map[  param[:level] ]   if param[:level]
-            requesttype[:statRange]         =     Level_map[ param[:range] ]    if param[:range]
-            requesttype[:unitOfTime]        =     Unit_map[ param[:unit] ]      if param[:unit] 
-            requesttype[:number]            =     param[:number]                if  param[:number]
-            requesttype[:device]            =     Device_map[ param[:device] ]  if param[:device]
-            requesttype[:startDate]         =     startDate
-            requesttype[:endDate]           =     endDate
-            requesttypes << requesttype
-=======
         def self.parse_date( date )
           """
           Cast string to time:
@@ -104,7 +81,6 @@ module PPC
             date = Time.new( y, m, d )
           else
             date = (Time.now - 24*3600)
->>>>>>> 43f2755d7491dab8246224e9157193d13b2b54c5
           end
           date
         end
@@ -143,7 +119,6 @@ module PPC
         end
    
         def self.download_report( auth, param, debug = false )
-          p param
           response = get_id( auth, param )
           if response[:succ]
             id = response[:result]
@@ -153,24 +128,10 @@ module PPC
               break if get_state( auth, id )[:result] == 'Finished'
               p "Report is not generated, waiting..." if debug 
             end
-
-<<<<<<< HEAD
-            requesttype[:performanceData]   =     param[:fields]  ||  %w(click impression)
-            requesttype[:reportType]        =     Type_map[ param[:type] ]     if  param[:type]
-            requesttype[:levelOfDetails]    =     Level_map[  param[:level] ]  if param[:level]
-            requesttype[:statRange]         =     Level_map[ param[:range] ]   if param[:range]
-            requesttype[:unitOfTime]        =     Unit_map[ param[:unit] ]     if param[:unit]
-            requesttype[:device]            =    Device_map[ param[:device] ]  if param[:device]
-            requesttype[:idOnly]            =    param[:id_only]  ||  false
-            requesttype[:startDate]         =    startDate
-            requesttype[:endDate]           =    endDate
-            requesttypes << requesttype
-=======
             url = get_url( auth, id )[:result]
             return open(url).read.force_encoding('gb18030').encode('utf-8')
           else
             raise response[:failure][0]["message"]
->>>>>>> 43f2755d7491dab8246224e9157193d13b2b54c5
           end
         end
 
