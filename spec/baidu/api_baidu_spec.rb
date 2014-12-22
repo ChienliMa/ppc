@@ -25,13 +25,12 @@ describe ::PPC::API::Baidu do
   end
 
   # params for make_type and reverse_type test
-    test_map = 
-  [
-    [ :id , :campaignId],
-    [ :name , :campaignName],
-    [ :exclude_ip, :excludeIp],
-    [ :exact_negative , :exactNegativeWords],
-  ]
+  test_map = [
+              [ :id , :campaignId],
+              [ :name , :campaignName],
+              [ :exclude_ip, :excludeIp],
+              [ :exact_negative , :exactNegativeWords],
+            ]
 
   test_type = {  }
   test_type['campaignId'] = 123

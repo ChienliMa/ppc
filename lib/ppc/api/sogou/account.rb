@@ -5,18 +5,18 @@ module PPC
         Service = 'Account'
 
         @map = [
-                          [:id,:accountid],            
-                          [:balance,:balance],         
-                          [:cost,:totalCost],               
-                          [:payment,:totalPay],                          
-                          [:budget_type,:type],                   
-                          [:budget,:budget],                              
-                          [:region,:regions],                    
-                          [:exclude_ip,:excludeIps],                        
-                          [:open_domains,:domains],                  
-                          [:offline_time,:budgetOfflineTime],         
-                          [:opt,:opt]                                  
-                        ]
+                [:id,:accountid],            
+                [:balance,:balance],         
+                [:cost,:totalCost],               
+                [:payment,:totalPay],                          
+                [:budget_type,:type],                   
+                [:budget,:budget],                              
+                [:region,:regions],                    
+                [:exclude_ip,:excludeIps],                        
+                [:open_domains,:domains],                  
+                [:offline_time,:budgetOfflineTime],         
+                [:opt,:opt]                                  
+              ]
 
         def self.info(auth, debug = false)
           response = request(auth,Service,'getAccountInfo'  )

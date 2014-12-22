@@ -6,20 +6,20 @@ module PPC
         Service = 'creative'
 
         @map = [
-                         [:id,:id] ,
-                         [:group_id, :groupId],
-                         [:title,:title],
-                         [:description1, :description1],
-                         [:description2, :description2],
-                         [:pc_destination, :destinationUrl],
-                         [:pc_display, :displayUrl]
-                      ]
+                 [:id,:id] ,
+                 [:group_id, :groupId],
+                 [:title,:title],
+                 [:description1, :description1],
+                 [:description2, :description2],
+                 [:pc_destination, :destinationUrl],
+                 [:pc_display, :displayUrl]
+                ]
 
         @status_map = [ 
-                                    [:id,:id], 
-                                    [:quality,:qualityScore],
-                                    [:status,:status]
-                                  ]
+                        [:id,:id], 
+                        [:quality,:qualityScore],
+                        [:status,:status]
+                      ]
 
         def self.get( auth, ids )
           body  = { 'idList' => to_json_string( ids ) }

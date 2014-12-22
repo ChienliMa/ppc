@@ -4,10 +4,7 @@ describe ::PPC::API::Sogou::Keyword do
   sogou的关键词服务在add的时候需要审核因此不能一次通过，
   会出现keyword is pending的error.不过手动测试方法没问题了。
   '''
-  auth =  {}
-  auth[:username] = $sogou_username
-  auth[:password] = $sogou_password 
-  auth[:token] = $sogou_token
+  auth = $sogou_auth
 
   ::PPC::API::Sogou.debug_off
   test_group_id = ::PPC::API::Sogou::Group::ids( auth )[:result][0][:group_ids][0]

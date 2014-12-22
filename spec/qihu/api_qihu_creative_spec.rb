@@ -1,7 +1,5 @@
 describe ::PPC::API::Qihu::Creative do
-  auth = {}
-  auth[:token] = $qihu_token
-  auth[:accessToken] = $qihu_accessToken
+  auth = $baidu_auth
 
   test_plan_id = ::PPC::API::Qihu::Account::ids( auth )[:result][0].to_i
   test_group_id = ::PPC::API::Qihu::Group::search_id_by_plan_id( auth, test_plan_id )[:result][0].to_i

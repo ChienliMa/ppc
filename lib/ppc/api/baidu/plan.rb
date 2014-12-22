@@ -17,6 +17,7 @@ module PPC
                 [:show_prob,:showProb],   
                 [:device,:device],
                 [:price_ratio,:priceRatio], 
+                [:is_dynamic,:isDynamicCreative],
                 [:pause,:pause],
                 [:status,:status]
                ]
@@ -40,14 +41,16 @@ module PPC
 
         def self.add( auth, plans )
           campaigntypes = make_type( plans )
-          body = { campaignTypes: campaigntypes }
+          # set extended = 1 to allow change of isDynamicCreative
+          body = { campaignTypes: campaigntypes, extended:1 }
           response = request( auth, Service, 'addCampaign', body)
           process( response, 'campaignTypes' ){ |x| reverse_type(x) }
         end
 
         def self.update(auth,plans )
           campaigntypes = make_type( plans )
-          body = { campaignTypes: campaigntypes }
+          # set extended = 1 to allow change of isDynamicCreative
+          body = { campaignTypes: campaigntypes, extended:1 }
           response = request( auth, Service, 'updateCampaign', body)
           process( response, 'campaignTypes' ){ |x| reverse_type(x) }
         end

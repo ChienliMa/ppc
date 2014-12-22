@@ -1,8 +1,5 @@
 describe ::PPC::API::Sogou::Account do
-  auth =  {}
-  auth[:username] = $sogou_username
-  auth[:password] = $sogou_password
-  auth[:token] = $sogou_token
+  auth = $sogou_auth
 
   it 'can get account info' do
       result = ::PPC::API::Sogou::Account::info( auth )

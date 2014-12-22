@@ -6,16 +6,16 @@ module PPC
         Service = 'campaign'
 
         @map = [
-                        [:id, :id],
-                        [:name,:name],
-                        [:budget, :budget],
-                        [:region, :region],
-                        [:schedule, :schedule],
-                        [:startDate, :startDate],
-                        [:endDate, :endDate ],
-                        [:status,:status], 
-                        [:extend_ad_type,:extendAdType]
-                      ]
+                  [:id, :id],
+                  [:name,:name],
+                  [:budget, :budget],
+                  [:region, :region],
+                  [:schedule, :schedule],
+                  [:startDate, :startDate],
+                  [:endDate, :endDate ],
+                  [:status,:status], 
+                  [:extend_ad_type,:extendAdType]
+                ]
 
 
         def self.get( auth, ids )

@@ -1,8 +1,5 @@
 describe ::PPC::API::Baidu::Group do
-  auth =  {}
-  auth[:username] = $baidu_username
-  auth[:password] = $baidu_password 
-  auth[:token] = $baidu_token
+  auth = $baidu_auth
 
   test_plan_id = ::PPC::API::Baidu::Plan.ids(auth)[:result][0]
   test_group_id = []

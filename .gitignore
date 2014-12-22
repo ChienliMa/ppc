@@ -1,3 +1,4 @@
+\.respec_failures
 *.gem
 *.rbc
 /.config

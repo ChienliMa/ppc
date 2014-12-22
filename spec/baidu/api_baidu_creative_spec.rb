@@ -1,9 +1,6 @@
 # -*- coding:utf-8 -*-
 describe ::PPC::API::Baidu::Creative do
-  auth =  {}
-  auth[:username] = $baidu_username
-  auth[:password] = $baidu_password 
-  auth[:token] = $baidu_token
+  auth = $baidu_auth
 
   test_group_id = ::PPC::API::Baidu::Group::ids( auth )[:result][0][:group_ids][0]
   test_plan_id = ::PPC::API::Baidu::Plan::all( auth )[:result][0][:plan_id]
